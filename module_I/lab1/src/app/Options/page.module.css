@@ -1,0 +1,65 @@
+.container {
+    display: flex; /*Utiliza flex para la distribucion de los elementos*/
+    flex-direction: column; /*Distribuye los elementos en una sola columna*/
+    align-items: center; /*Centra los elementos horizontalmente*/
+    justify-content: center; /*Centro los elementos verticalmente*/
+    height: 100vh; /*Hace que ocupe el 100% de la altura (Viewport)*/
+    padding: 0 10px; /*Añade un espacio alrededor del elemento*/
+    font-size: 10px; /*Tamaño de la fuente*/
+    text-align: center; /*Centra el texto*/
+}
+
+.buttonOptions {
+    margin: 5px 0; /*Añade margen*/
+    padding: 10px 20px;
+    font-size: 16px; 
+    width: 100%; /*Ancho*/
+    max-width: 300px; /*Limita el ancho maximo*/
+}
+
+.marginBottom {
+    margin-bottom: 20px; /*Añade margen inferior*/
+}
+
+/*RWD para pantallas de 600px*/
+@media (min-width: 600px) {
+    .buttonOptions {
+        font-size: 18px; 
+        width: auto;
+        margin-right: 10px; /*Añade margen derecho*/
+    }
+
+    .container {
+        padding: 30px;
+    }
+}
+/*RWD para pantallas de 768px*/
+@media (min-width: 768px) {
+    .buttonOptions {
+        font-size: 20px;
+    }
+
+    .container {
+        padding: 40px;
+    }
+}
+/*RWD para pantallas de 992px*/
+@media (min-width: 992px) {
+    .buttonOptions {
+        font-size: 22px;
+    }
+
+    .container {
+        padding: 50px;
+    }
+}
+/*RWD para pantallas de 1200px*/
+@media (min-width: 1200px) {
+    .buttonOptions {
+        font-size: 24px;
+    }
+
+    .container {
+        padding: 60px;
+    }
+}

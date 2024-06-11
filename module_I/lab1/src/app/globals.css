@@ -100,8 +100,24 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/*CSS para el header y el footer*/
+
+header {
+  color: #000000; /*Color de la letra*/
+  padding: 20px; /*Añade un espacio alrededor del elemento*/
+  text-align: left; /*Centra el texto*/
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'space-between';
+  position: relative;
 }
+
+footer {
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+.image {
+  margin-left: auto;
+}
+/*Fin de los stilos CSS para el header y el footer*/
