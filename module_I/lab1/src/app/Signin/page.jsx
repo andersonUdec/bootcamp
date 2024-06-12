@@ -7,30 +7,36 @@ import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useRouter } from 'next/navigation';
+import { Container, Form } from "react-bootstrap";
 
 export default function SigninPage(){
     let { value: emailValue, bind: emailBind } = useInputHook('');
     let { value: passwordValue, bind: passwordBind } = useInputHook('');
 
     const [message, setMessage] = useState({ text: '', type: '' });
+    
     return(
-        <div className={styles.container}>
+        <Container>
             <h1>Registro de usuarios:</h1>
-            <form  noValidate>
-                <label className={styles.label}>Email:</label>
-                <input id="email" name="email" type="email" className={styles.input} required
-                    {...emailBind}
-                />
+            <Form noValidate>
+                <Form.Group className="mb-3" controlId="email">
+                    <Form.Label>Correo electronico:</Form.Label>
+                    <Form.Control  name="email" type="email" placeholder="Ingresa tu email" required {...emailBind}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="password">
+                    <Form.Label>Contraseña/Password:</Form.Label>
+                    <Form.Control type="password" placeholder="Password" required {...passwordBind}/>
+                </Form.Group>
                 <br />
-                <label className={styles.label}>Contraseña/Password:</label>
-                <input id="password" name="password" type="password" className={styles.input} required
-                    {...passwordBind}
-                />
-                <button className={styles.button} type="submit">Registrarme</button>
-            </form>
-            <br />
-            {message.text && <Alert variant={message.type}>{message.text}</Alert>}
-            <br />
-        </div>
+                <div className="d-flex justify-content-center">
+                    <Button variant="primary" type="submit">
+                        Iniciar sesión
+                    </Button>
+                </div>
+            </Form>
+            <div className="d-flex justify-content-center">
+                {message.text && <Alert variant={message.type}>{message.text}</Alert>}
+            </div>
+        </Container>
     );
 }

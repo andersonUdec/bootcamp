@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useInputHook } from "lab1/Hooks/use-input-hook";
 import styles from "./page.module.css";
 import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { useRouter } from 'next/navigation';
+import Form from 'react-bootstrap/Form';
+import { Container } from "react-bootstrap";
 
 export default function SignupPage() {
     const [documentsTypeList] = useState([
@@ -52,7 +54,9 @@ export default function SignupPage() {
 
     const handleConfirm = () => {
         setShowModal(false);
-        getDataFormMyForm(formEvent);
+        if (formEvent) {
+            getDataFormMyForm(formEvent);
+        }
     };
 
     const handleCancel = () => {
@@ -128,59 +132,63 @@ export default function SignupPage() {
     };
 
     return (
-        <div className={styles.container}>
+        <Container>
             <h1>Registro de usuarios:</h1>
-            <form onSubmit={handleShowModal} noValidate>
-                <label className={styles.label}>Email:</label>
-                <input id="email" name="email" type="email" className={styles.input} required
-                    {...emailBind}
-                />
-                <br />
-                <label className={styles.label}>Nombre(s):</label>
-                <input id="firstName" name="firstName" type="text" className={styles.input} required
-                    {...firstNameBind}
-                />
-                <br />
-                <label className={styles.label}>Apellido(s):</label>
-                <input id="lastName" name="lastName" type="text" className={styles.input} required
-                    {...lastNameBind}
-                />
-                <br />
-                <label className={styles.label}>Tipo de identificación:</label>
-                <select id="documentType" name="documentType" value={documentTypeValue} {...documentTypeBind} className={styles.input} required>
-                    <option value="">Seleccione un tipo de identificación</option>
-                    {documentsTypeList.map((doc) => (
-                        <option key={doc.id} value={doc.id}>{doc.name}</option>
-                    ))}
-                </select>
-                <br />
-                <label className={styles.label}>Número o ID de identificación:</label>
-                <input id="documentId" name="documentId" type="text" className={styles.input} required
-                    {...documentIdBind}
-                />
-                <br />
-                <label className={styles.label}>Teléfono:</label>
-                <input id="phone" name="phone" type="text" className={styles.input} required
-                    {...phoneBind}
-                />
-                <br />
-                <label className={styles.label}>Dirección:</label>
-                <input id="address" name="address" type="text" className={styles.input} required
-                    {...addressBind}
-                />
-                <br />
-                <label className={styles.label}>Contraseña/Password:</label>
-                <input id="password" name="password" type="password" className={styles.input} required
-                    {...passwordBind}
-                />
-                <button className={styles.button} type="submit">Registrarme</button>
-            </form>
+            <Form onSubmit={handleShowModal} noValidate>
+                <Form.Group className="mb-3" controlId="email">
+                    <Form.Label>Correo electronico:</Form.Label>
+                    <Form.Control  name="email" type="email" placeholder="Ingresa tu email" required {...emailBind}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="firstName">
+                    <Form.Label>Nombre(s):</Form.Label>
+                    <Form.Control  name="firstName" type="text" placeholder="Ingresa tus nombres" required {...firstNameBind}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="lastName">
+                    <Form.Label>Apellido(s):</Form.Label>
+                    <Form.Control  name="lastName" type="text" placeholder="Ingresa tus apellidos" required {...lastNameBind}/>
+                </Form.Group>
+                <Form.Group  className="mb-3" controlId="documentType" value={documentTypeValue} required {...documentTypeBind}>
+                    <Form.Label>Tipo de identificación:</Form.Label>
+                    <Form.Select id="documentType" name="documentType" aria-label="Default select example">
+                        <option value="">Seleccione un tipo de identificación</option>
+                        {documentsTypeList.map((doc) => (
+                            <option key={doc.id} value={doc.id}>{doc.name}</option>
+                        ))}
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="documentId">
+                    <Form.Label>Número o ID de identificación:</Form.Label>
+                    <Form.Control  name="documentId" type="text" placeholder="Ingresa tu numero de documento" required {...documentIdBind}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="phone">
+                    <Form.Label>Teléfono:</Form.Label>
+                    <Form.Control  name="phone" type="text" placeholder="Ingresa tu numero telefonico" required {...phoneBind}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="address">
+                    <Form.Label>Dirección:</Form.Label>
+                    <Form.Control  name="address" type="text" placeholder="Ingresa tu dirección de residencia" required {...addressBind}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="password">
+                    <Form.Label>Contraseña/Password:</Form.Label>
+                    <Form.Control type="password" placeholder="Password" required {...passwordBind}/>
+                </Form.Group>
+                <div className="d-flex justify-content-center">
+                    <Button variant="primary" type="submit">
+                        Registrarme
+                    </Button>
+                </div>
+            </Form>
             <br />
-            {message.text && <Alert variant={message.type}>{message.text}</Alert>}
+            <div className="d-flex justify-content-center">
+                {message.text && <Alert variant={message.type}>{message.text}</Alert>}
+            </div>
             <br />
-            <Link href="/">
-                <button className={styles.button}>Volver al inicio</button>
-            </Link>
+            
+            <div className="d-flex justify-content-center">
+                <Link href="/">
+                    <Button>Volver al inicio</Button>
+                </Link>
+            </div>
 
             <Modal show={showModal} onHide={handleCancel} centered>
                 <Modal.Header closeButton>
@@ -198,6 +206,7 @@ export default function SignupPage() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+
+        </Container>
     );
 }
