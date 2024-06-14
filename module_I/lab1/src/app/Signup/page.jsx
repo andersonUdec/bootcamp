@@ -72,7 +72,6 @@ export default function SignupPage() {
             setMessage({ text: 'Por favor, diligencia todos los campos', type: 'danger' });
             return;
         }
-
         if (emailValue && firstNameValue && lastNameValue && documentTypeValue && documentIdValue && phoneValue && addressValue && passwordValue) {
             const duplicateEmail = registeredUsers.some(user => user.email === emailValue);
             const duplicateDocumentId = registeredUsers.some(user => user.documentId === documentIdValue);
