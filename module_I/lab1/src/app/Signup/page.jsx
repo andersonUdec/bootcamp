@@ -42,6 +42,12 @@ export default function SignupPage() {
     const router = useRouter();
 
     useEffect(() => {
+        const loggedUserFromStorage = JSON.parse(localStorage.getItem('loggedUser')) || [];
+        if (loggedUserFromStorage.length > 0 || loggedUserFromStorage.email) {
+            setTimeout(() => {
+                router.push('/');
+            }, 1000);
+        }
         const usersFromStorage = JSON.parse(localStorage.getItem('registeredUsers')) || [];
         setRegisteredUsers(usersFromStorage);
     }, []);
@@ -77,15 +83,15 @@ export default function SignupPage() {
             const duplicateDocumentId = registeredUsers.some(user => user.documentId === documentIdValue);
             const duplicatePhone = registeredUsers.some(user => user.phone === phoneValue);
 
-            if (duplicateEmail ) {
+            if (duplicateEmail) {
                 setMessage({ text: 'El email ya se encuentra registrado.', type: 'danger' });
                 return;
             }
-            if(duplicateDocumentId){
+            if (duplicateDocumentId) {
                 setMessage({ text: 'Número o ID de identificación ya se encuentra registrado.', type: 'danger' });
                 return;
             }
-            if(duplicatePhone){
+            if (duplicatePhone) {
                 setMessage({ text: 'El teléfono ya se encuentra registrado.', type: 'danger' });
                 return;
             }
@@ -132,23 +138,23 @@ export default function SignupPage() {
 
     return (
         <Container>
-            <h1>Registro de usuarios:</h1>
+            <h1 className="d-flex justify-content-center">Registro de usuarios:</h1>
             <Form onSubmit={handleShowModal} noValidate>
                 <Form.Group className="mb-3" controlId="email">
                     <Form.Label>Correo electronico:</Form.Label>
-                    <Form.Control  name="email" type="email" placeholder="Ingresa tu email" required {...emailBind}/>
+                    <Form.Control name="email" type="email" placeholder="Ingresa tu email" required {...emailBind} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="firstName">
                     <Form.Label>Nombre(s):</Form.Label>
-                    <Form.Control  name="firstName" type="text" placeholder="Ingresa tus nombres" required {...firstNameBind}/>
+                    <Form.Control name="firstName" type="text" placeholder="Ingresa tus nombres" required {...firstNameBind} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="lastName">
                     <Form.Label>Apellido(s):</Form.Label>
-                    <Form.Control  name="lastName" type="text" placeholder="Ingresa tus apellidos" required {...lastNameBind}/>
+                    <Form.Control name="lastName" type="text" placeholder="Ingresa tus apellidos" required {...lastNameBind} />
                 </Form.Group>
-                <Form.Group  className="mb-3" controlId="documentType" value={documentTypeValue} required {...documentTypeBind}>
+                <Form.Group className="mb-3" controlId="documentType" value={documentTypeValue}  {...documentTypeBind}>
                     <Form.Label>Tipo de identificación:</Form.Label>
-                    <Form.Select id="documentType" name="documentType" aria-label="Default select example">
+                    <Form.Select id="documentType" name="documentType" aria-label="Default select example" required>
                         <option value="">Seleccione un tipo de identificación</option>
                         {documentsTypeList.map((doc) => (
                             <option key={doc.id} value={doc.id}>{doc.name}</option>
@@ -157,19 +163,19 @@ export default function SignupPage() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="documentId">
                     <Form.Label>Número o ID de identificación:</Form.Label>
-                    <Form.Control  name="documentId" type="text" placeholder="Ingresa tu numero de documento" required {...documentIdBind}/>
+                    <Form.Control name="documentId" type="number" placeholder="Ingresa tu numero de documento" required {...documentIdBind} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="phone">
                     <Form.Label>Teléfono:</Form.Label>
-                    <Form.Control  name="phone" type="text" placeholder="Ingresa tu numero telefonico" required {...phoneBind}/>
+                    <Form.Control name="phone" type="number" placeholder="Ingresa tu numero telefonico" required {...phoneBind} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="address">
                     <Form.Label>Dirección:</Form.Label>
-                    <Form.Control  name="address" type="text" placeholder="Ingresa tu dirección de residencia" required {...addressBind}/>
+                    <Form.Control name="address" type="text" placeholder="Ingresa tu dirección de residencia" required {...addressBind} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="password">
                     <Form.Label>Contraseña/Password:</Form.Label>
-                    <Form.Control type="password" placeholder="Password" required {...passwordBind}/>
+                    <Form.Control type="password" placeholder="Password" required {...passwordBind} />
                 </Form.Group>
                 <div className="d-flex justify-content-center">
                     <Button variant="primary" type="submit">
@@ -181,8 +187,8 @@ export default function SignupPage() {
             <div className="d-flex justify-content-center">
                 {message.text && <Alert variant={message.type}>{message.text}</Alert>}
             </div>
-            <br />
-            
+            <br/>
+
             <div className="d-flex justify-content-center">
                 <Link href="/">
                     <Button>Volver al inicio</Button>

@@ -19,3 +19,15 @@ footer {
   margin-left: auto;
 }
 /*Fin de los stilos CSS para el header y el footer*/
+
+
+
+body {
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
