@@ -21,7 +21,6 @@ export default function OptionsPage() {
                     <Button>Iniciar Sesión</Button>
                 </Link>
             </Form>
-
         </Container>
     );
 }

@@ -6,6 +6,8 @@ Es un proyecto pequeño realizado con Next.Js, React, Express, PostgreSQL y Mong
 El proyecto trata de la gestion de usuarios y productos liderado por el docente Alejandro Romero, que nos guia y nos da las pautas ma importantes al tener en cuenta al escribir codigo limpio, legible y con buenas practicas.
 
 
+#Quien participa
+Anderson Arley Suarez Romero. GitHub https://github.com/andersonUdec
 #Instaladores:
 !Necesarios
 Git. https://www.git-scm.com/
