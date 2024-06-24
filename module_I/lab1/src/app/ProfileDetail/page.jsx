@@ -27,6 +27,7 @@ export default function ProfileDetailPage() {
     const [showModal, setShowModal] = useState(false);
     const [message, setMessage] = useState({ text: '', type: '' });
     const [formEvent, setFormEvent] = useState(null);
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         const loggedUserFromStorage = JSON.parse(localStorage.getItem('loggedUser')) || [];
@@ -38,6 +39,7 @@ export default function ProfileDetailPage() {
             }, 1000);
         }
     }, []);
+    
 
     const handleShowModal = (event) => {
         event.preventDefault();
@@ -78,15 +80,23 @@ export default function ProfileDetailPage() {
             setMessage({ text: 'La confirmación de la contraseña y la nueva contraseña no son iguales.', type: 'danger' });
             return;
         }
-        setUserLogged((userLogged) => ({
-            ...userLogged,
-            password: encodeBase64(passwordNewValue),
-        }));
-        setMessage({ text: 'Contraseña actualizada con éxito', type: 'success' });
-        localStorage.removeItem('loggedUser');
-        setTimeout(() => {
-            router.push('/Signin');
-        }, 1000);
+        const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+        const userFindedIndex = registeredUsers.findIndex(user => user.email === userLogged.email);
+
+        if (userFindedIndex !== -1) {
+            console.log(registeredUsers[userFindedIndex]);
+            registeredUsers[userFindedIndex].password = encodeBase64(passwordNewValue);
+
+            localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+
+            setMessage({ text: 'Contraseña actualizada con éxito', type: 'success' });
+            localStorage.removeItem('loggedUser');
+            setTimeout(() => {
+                router.push('/Signin');
+            }, 1000);
+        }else {
+            setMessage({ text: 'Usuario no encontrado', type: 'danger' });
+        }      
     };
 
     const encodeBase64 = word => {
