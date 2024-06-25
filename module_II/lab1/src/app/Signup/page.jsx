@@ -211,7 +211,7 @@ export default function SignupPage() {
                     <div className="modal-action">
                         <form method="dialog">
                             <button className="btn btn-outline mb-4 mr-2" onClick={handleConfirm}>Confirmar</button>
-                            <button className="btn btn-outline mb-4 ml-2" onClick={handleCancel}>Cancelar</button>
+                            <button className="btn btn-error mb-4 ml-2" onClick={handleCancel}>Cancelar</button>
                         </form>
                     </div>
                 </div>
