@@ -1,0 +1,15 @@
+{
+  "name": "lab1",
+  "version": "1.0.0",
+  "description": "Get number of genders from a json",
+  "main": "lab1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Genders",
+    "json"
+  ],
+  "author": "Anderson Suarez",
+  "license": "ISC"
+}
