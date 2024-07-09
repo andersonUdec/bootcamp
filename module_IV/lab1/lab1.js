@@ -1,5 +1,4 @@
 const performance = require("perf_hooks");
-
 const elementsJson =  require('../elements.json');
 
 function countGenders(elements) {
